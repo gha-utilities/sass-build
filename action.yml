@@ -1,0 +1,21 @@
+name: 'Sass Build'
+description: 'GitHub Action JavaScript wrapper runs Sass build with provided Inputs'
+
+
+inputs:
+  source:
+    description: 'Relative path to SASS or SCSS file, eg. _scss/main.scss'
+    required: true
+  destination:
+    description: 'Path compiled CSS should be saved, eg. ~/workspace_sass/assets/css/main.css'
+    required: true
+
+
+runs:
+  using: 'node12'
+  main: 'index.js'
+
+
+branding:
+  icon: layout
+  color: black
