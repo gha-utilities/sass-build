@@ -10,6 +10,20 @@ function get_gha_input(name) {
 const source = get_gha_input('source');
 const destination = get_gha_input('destination');
 
+if (source === undefined || destination === undefined) {
+  const error_message = [
+    'Required environment variable(s) are undefined!'
+    `  source -> ${source}`,
+    `  destination -> ${destination}`,
+    'Please assign missing environment variables via',
+    '  INPUT_SOURCE="path/to/main.scss"\\',
+    '  INPUT_DESTINATION="assets/css/main.css"\\',
+    '  node index.js'
+  ];
+
+  throw new ReferenceError(error_message.join('\n'));
+}
+
 
 const render_options = { file: source };
 

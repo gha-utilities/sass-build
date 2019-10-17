@@ -39,7 +39,7 @@ GitHub Action JavaScript wrapper runs Sass build with provided Inputs
   "&#x1F3D7; What is needed prior to making use of this repository"
 
 
-Access to GitHub Actions if using on GitHub, or Docker knowhow if utilizing privately.
+Access to GitHub Actions if using on GitHub, or manually assigning environment variables prior to running `npm test`.
 
 
 ___
@@ -255,7 +255,7 @@ Legal bits of Open Source software. Note the following license does **not** nece
 
 
 ```
-SCSS GitHub Actions documentation
+Sass Build GitHub Actions documentation
 Copyright (C) 2019  S0AndS0
 
 This program is free software: you can redistribute it and/or modify

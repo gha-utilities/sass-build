@@ -4,7 +4,7 @@
   "description": "GitHub Action JavaScript wrapper runs Sass build with provided Inputs",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node index.js"
   },
   "repository": {
     "type": "git",
