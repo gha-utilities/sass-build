@@ -77,7 +77,7 @@ jobs:
         run: mkdir -vp /tmp/repo-name/assets/css
 
       - name: Compile CSS from SCSS files
-        uses: gha-utilities/sass-build@v0.0.1
+        uses: gha-utilities/sass-build@v0.0.2
         with:
           source: _scss/main.scss
           destination: /tmp/repo-name/assets/css/main.css
@@ -112,18 +112,18 @@ ___
   "&#x1F5D2; Additional notes and links that may be worth clicking in the future"
 
 
-This repository is currently not feature complete, to compile multiple sources and destinations one should define multiple steps...
+This repository is getting closer to feature complete, however, to compile multiple sources and destinations one should define multiple steps...
 
 
 ```YAML
     - name: Compile main.css from main.scss
-      uses: gha-utilities/sass-build@v0.0.1
+      uses: gha-utilities/sass-build@v0.0.2
       with:
         source: _scss/main.scss
         destination: /tmp/repo-name/assets/css/main.css
 
     - name: Compile alt.css from alt.scss
-      uses: gha-utilities/sass-build@v0.0.1
+      uses: gha-utilities/sass-build@v0.0.2
       with:
         source: _scss/alt.scss
         destination: /tmp/repo-name/assets/css/alt.css
@@ -162,7 +162,7 @@ jobs:
         run: mkdir -vp /tmp/assets/css
 
       - name: Compile CSS from SCSS files
-        uses: gha-utilities/sass-build@v0.0.1
+        uses: gha-utilities/sass-build@v0.0.2
         with:
           source: _scss/main.scss
           destination: /tmp/assets/css/main.css
@@ -219,7 +219,8 @@ jobs:
 ------
 
 
-This repository is influenced by tests preformed by `sass-utilities/gha-sass` which uses Docker powered GitHub Actions to achieve similar results.
+This repository is influenced by tests preformed by `sass-utilities/gha-sass` which uses Docker powered GitHub Actions to achieve similar results. What differs are that this repository will start faster and enables configuring the build process further, see the [`action.yml`](action.yml) for currently available configurations.
+
 
 ___
 

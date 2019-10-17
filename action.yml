@@ -6,9 +6,64 @@ inputs:
   source:
     description: 'Relative path to SASS or SCSS file, eg. _scss/main.scss'
     required: true
+
   destination:
     description: 'Path compiled CSS should be saved, eg. ~/workspace_sass/assets/css/main.css'
     required: true
+
+
+  ## Optional Inputs
+  includePaths:
+    description: 'Array (Action splits on ":"), of directories to look under for imports and used modules'
+    required: false
+
+  outputStyle:
+    description: 'String, either "expanded", "compressed", "nested", "compact"'
+    required: false
+
+  precision:
+    description: 'Integer and float precision when compiling CSS, eg. `20`'
+    required: false
+
+  indentType:
+    description: 'String, either "space" or "tab", default "space"'
+    required: false
+
+  indentWidth:
+    description: 'Integer, of tabs/spaces used to indent, eg. `1`'
+    required: false
+
+  linefeed:
+    description: 'String, either "lf", "lfcr", "cr", or "crlf", default "lf"'
+    required: false
+
+  sourceComments:
+    description: 'Boolean, default `false` if `true` emits comments where CSS was compiled from'
+    required: false
+
+  sourceMap:
+    description: 'May be boolean or string, see https://sass-lang.com/documentation/js-api#sourcemap'
+    required: false
+
+  outFile:
+    description: 'String, does not write but is useful in combination with "sourceMap"'
+    required: false
+
+  omitSourceMapUrl:
+    description: 'Boolean, when `true` compiled CSS is not linked to source map'
+    required: false
+
+  sourceMapContents:
+    description: 'Boolean, when `true` embeds contents of Sass files that contributed to compiled CSS'
+    required: false
+
+  sourceMapEmbed:
+    description: 'Boolean, when `true` embeds source map within compiled CSS'
+    required: false
+
+  sourceMapRoot:
+    description: 'String, prepended to all links from from source map to Sass files'
+    required: false
 
 
 runs:
