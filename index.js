@@ -12,7 +12,7 @@ const destination = get_gha_input('destination');
 
 if (source === undefined || destination === undefined) {
   const error_message = [
-    'Required environment variable(s) are undefined!'
+    'Required environment variable(s) are undefined!',
     `  source -> ${source}`,
     `  destination -> ${destination}`,
     'Please assign missing environment variables via',
