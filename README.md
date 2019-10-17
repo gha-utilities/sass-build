@@ -231,15 +231,18 @@ ___
   "&#x1F4C7; Resources that where helpful in building this project so far."
 
 
-- [Workflow syntax for GitHub actions](https://help.github.com/en/articles/workflow-syntax-for-github-actions)
 
-- [Actions Create Pull Request](https://github.com/marketplace/actions/create-pull-request)
+- [GitHub -- Actions Create Pull Request](https://github.com/marketplace/actions/create-pull-request)
+
+- [GitHub -- Creating a JavaScript Action](https://help.github.com/en/articles/creating-a-javascript-action#commit-and-push-your-action-to-github), specifically the `commit-and-push-your-action-to-github` section that states dependencies need to be checked into Git tracking.
 
 - [GitHub -- Node Sass `outfile`](https://github.com/sass/node-sass#outfile)
 
-- [StackOverflow -- GitHub Actions share Workspace Artifacts between jobs](https://stackoverflow.com/questions/57498605)
+- [GitHub -- Workflow syntax for GitHub actions](https://help.github.com/en/articles/workflow-syntax-for-github-actions)
 
-- [GitHub -- Creating a JavaScript Action](https://help.github.com/en/articles/creating-a-javascript-action#commit-and-push-your-action-to-github), specifically the `commit-and-push-your-action-to-github` section that states dependencies need to be checked into Git tracking.
+- [Sass Language -- JS API Documentation](https://sass-lang.com/documentation/js-api)
+
+- [StackOverflow -- GitHub Actions share Workspace Artifacts between jobs](https://stackoverflow.com/questions/57498605)
 
 
 ___
