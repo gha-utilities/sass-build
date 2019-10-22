@@ -85,21 +85,35 @@ jobs:
       - name: Checkout destination Git branch
         uses: actions/checkout@v1
         with:
-            ref: gh-pages
+            ref: pr-pages
             fetch-depth: 1
 
-      - name: Move compiled CSS to path within target branch
+      - name: Move compiled CSS to path within pr-pages branch
         run: mv /tmp/repo-name/assets/css assets/
 
-      - name: Open Pull Request
-        uses: peter-evans/create-pull-request@v1.5.0
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          COMMIT_MESSAGE: Compiles CSS from SCSS files
-          PULL_REQUEST_BODY: >
-            This pull request was auto-generated thanks to [create-pull-request](https://github.com/peter-evans/create-pull-request)
+      - name: Add and Commit changes to pr-pages branch
+        run: |
+          git config --local user.email 'action@github.com'
+          git config --local user.name 'GitHub Action'
+          git add assets/css/*
+          git commit -m 'Updates compiled CSS files'
 
-            And builds CSS with Dart Sass via [gha-utilities/sass-build](https://github.com/gha-utilities/sass-build)
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: pr-pages
+
+      - name: Initialize Pull Request
+        uses: gha-utilities/init-pull-request@v0.0.1
+        with:
+          pull_request_token: ${{ secrets.GITHUB_TOKEN }}
+          head: pr-pages
+          base: gh-pages
+          title: 'Updates site files from latest Actions build'
+          body: >
+            Perhaps a multi-line description
+            about latest features and such.
 ```
 
 
@@ -204,15 +218,29 @@ jobs:
           name: Compiled-CSS
           path: assets/css
 
-      - name: Open Pull Request
-        uses: peter-evans/create-pull-request@v1.5.0
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          COMMIT_MESSAGE: Compiles CSS from SCSS files
-          PULL_REQUEST_BODY: >
-            This pull request was auto-generated thanks to [create-pull-request](https://github.com/peter-evans/create-pull-request)
+      - name: Add and Commit changes to pr-pages branch
+        run: |
+          git config --local user.email 'action@github.com'
+          git config --local user.name 'GitHub Action'
+          git add assets/css/*
+          git commit -m 'Updates compiled CSS files'
 
-            And builds CSS with Dart Sass via [gha-utilities/sass-build](https://github.com/gha-utilities/sass-build)
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: pr-pages
+
+      - name: Initialize Pull Request
+        uses: gha-utilities/init-pull-request@v0.0.1
+        with:
+          pull_request_token: ${{ secrets.GITHUB_TOKEN }}
+          head: pr-pages
+          base: gh-pages
+          title: 'Updates site files from latest Actions build'
+          body: >
+            Perhaps a multi-line description
+            about latest features and such.
 ```
 
 
