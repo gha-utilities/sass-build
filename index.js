@@ -2,9 +2,7 @@ const fs = require('fs');
 const sass = require('sass');
 
 
-function get_gha_input(name) {
-  return process.env[`INPUT_${name.toUpperCase()}`];
-}
+const get_gha_input = function(name) { return process.env[`INPUT_${name.toUpperCase()}`]; };
 
 
 const source = get_gha_input('source');
