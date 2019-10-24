@@ -105,7 +105,7 @@ jobs:
           branch: pr-pages
 
       - name: Initialize Pull Request
-        uses: gha-utilities/init-pull-request@v0.0.1
+        uses: gha-utilities/init-pull-request@v0.0.2
         with:
           pull_request_token: ${{ secrets.GITHUB_TOKEN }}
           head: pr-pages
@@ -232,7 +232,7 @@ jobs:
           branch: pr-pages
 
       - name: Initialize Pull Request
-        uses: gha-utilities/init-pull-request@v0.0.1
+        uses: gha-utilities/init-pull-request@v0.0.2
         with:
           pull_request_token: ${{ secrets.GITHUB_TOKEN }}
           head: pr-pages
