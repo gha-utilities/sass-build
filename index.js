@@ -75,7 +75,8 @@ integer_gha_input_names.forEach((name) => {
 
 
 string_gha_input_names.forEach((name) => {
-  if (get_gha_input(name) !== undefined) {
+  let value = get_gha_input(name);
+  if (value !== undefined && value !== "") {
     render_options[name] = get_gha_input(name);
   }
 });
@@ -103,6 +104,7 @@ if (get_gha_input('sourceMap') !== undefined) {
  * Compile and write-out CSS
  */
 
+console.log(render_options);
 
 const result = sass.renderSync(render_options);
 
