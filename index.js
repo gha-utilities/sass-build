@@ -23,7 +23,7 @@ if (source === undefined || destination === undefined) {
 }
 
 
-const render_options = { file: source, outputStyle: 'compact' };
+const render_options = { file: source, outputStyle: 'compressed' };
 
 
 /**
