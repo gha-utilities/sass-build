@@ -68,7 +68,7 @@ boolean_gha_input_names.forEach((name) => {
 integer_gha_input_names.forEach((name) => {
   const env_value = get_gha_input(name);
 
-  if (env_value !== undefined && Number.parseInt(env_value) !== NaN) {
+  if (env_value !== undefined && env_value !== "" && Number.parseInt(env_value) != NaN) {
     render_options[name] = Number.parseInt(env_value);
   }
 });
