@@ -84,27 +84,20 @@ string_gha_input_names.forEach((name) => {
 /**
  * Inputs that require a bit more care
  */
+if (get_gha_input('includePaths') !== undefined) {
+  render_options['includePaths'] = get_gha_input('includePaths').split(':');
+}
 
-string_gha_input_names.forEach((name) => {
-  // 'includePaths'       // Array, directories to look under for imports and used modules, splits on ':'
-  if (get_gha_input('includePaths') !== undefined) {
-    render_options[name] = get_gha_input('includePaths').split(':');
-  }
-});
-
-string_gha_input_names.forEach((name) => {
 // 'sourceMap'          // May be boolean or string, see https://sass-lang.com/documentation/js-api#sourcemap
-  if (get_gha_input('sourceMap') !== undefined) {
-    const env_value = get_gha_input('sourceMap');
+if (get_gha_input('sourceMap') !== undefined) {
+  const env_value = get_gha_input('sourceMap');
 
-    if (env_value === 'true' || env_value === 'false') {
-      render_options[name] = (env_value === 'true');
-    } else {
-      render_options[name] = env_value;
-    }
+  if (env_value === 'true' || env_value === 'false') {
+    render_options['sourceMap'] = (env_value === 'true');
+  } else {
+    render_options['sourceMap'] = env_value;
   }
-});
-
+}
 
 /**
  * Compile and write-out CSS
