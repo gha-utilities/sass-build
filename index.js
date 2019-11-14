@@ -4,7 +4,6 @@ const sass = require('sass');
 
 const get_gha_input = function(name) { return process.env[`INPUT_${name.toUpperCase()}`]; };
 
-
 const source = get_gha_input('source');
 const destination = get_gha_input('destination');
 
@@ -85,13 +84,15 @@ string_gha_input_names.forEach((name) => {
 /**
  * Inputs that require a bit more care
  */
-if (get_gha_input('includePaths') !== undefined) {
-  render_options['includePaths'] = get_gha_input('includePaths').split(':');
+let includePaths = get_gha_input('includePaths');
+if (includePaths !== undefined && includePaths != "") {
+  render_options['includePaths'] = includePaths.split(':');
 }
 
 // 'sourceMap'          // May be boolean or string, see https://sass-lang.com/documentation/js-api#sourcemap
-if (get_gha_input('sourceMap') !== undefined) {
-  const env_value = get_gha_input('sourceMap');
+let sourceMap = get_gha_input('sourceMap');
+if (sourceMap !== undefined && sourceMap != "") {
+  const env_value = sourceMap;
 
   if (env_value === 'true' || env_value === 'false') {
     render_options['sourceMap'] = (env_value === 'true');
