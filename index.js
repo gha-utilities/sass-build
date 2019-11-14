@@ -85,23 +85,25 @@ string_gha_input_names.forEach((name) => {
  * Inputs that require a bit more care
  */
 
-
-// 'includePaths'       // Array, directories to look under for imports and used modules, splits on ':'
-if (get_gha_input('includePaths') !== undefined) {
-  render_options[name] = get_gha_input('includePaths').split(':');
-}
-
-
-// 'sourceMap'          // May be boolean or string, see https://sass-lang.com/documentation/js-api#sourcemap
-if (get_gha_input('sourceMap') !== undefined) {
-  const env_value = get_gha_input('sourceMap');
-
-  if (env_value === 'true' || env_value === 'false') {
-    render_options[name] = (env_value === 'true');
-  } else {
-    render_options[name] = env_value;
+string_gha_input_names.forEach((name) => {
+  // 'includePaths'       // Array, directories to look under for imports and used modules, splits on ':'
+  if (get_gha_input('includePaths') !== undefined) {
+    render_options[name] = get_gha_input('includePaths').split(':');
   }
-}
+});
+
+string_gha_input_names.forEach((name) => {
+// 'sourceMap'          // May be boolean or string, see https://sass-lang.com/documentation/js-api#sourcemap
+  if (get_gha_input('sourceMap') !== undefined) {
+    const env_value = get_gha_input('sourceMap');
+
+    if (env_value === 'true' || env_value === 'false') {
+      render_options[name] = (env_value === 'true');
+    } else {
+      render_options[name] = env_value;
+    }
+  }
+});
 
 
 /**
@@ -110,7 +112,6 @@ if (get_gha_input('sourceMap') !== undefined) {
 
 
 const result = sass.renderSync(render_options);
-
 
 fs.writeFile(destination, result.css, (err) => {
   if (err) {
