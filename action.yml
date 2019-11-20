@@ -65,6 +65,10 @@ inputs:
     description: 'String, prepended to all links from from source map to Sass files'
     required: false
 
+  debug:
+    description: 'Outputs render_options used for compiling CSS'
+    required: false
+
 
 runs:
   using: 'node12'

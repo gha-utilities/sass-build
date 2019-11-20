@@ -68,14 +68,16 @@ boolean_gha_input_names.forEach((name) => {
 integer_gha_input_names.forEach((name) => {
   const env_value = get_gha_input(name);
 
-  if (env_value !== undefined && Number.parseInt(env_value) !== NaN) {
+  if (env_value !== undefined && env_value !== '' && Number.parseInt(env_value) !== NaN) {
     render_options[name] = Number.parseInt(env_value);
   }
 });
 
 
 string_gha_input_names.forEach((name) => {
-  if (get_gha_input(name) !== undefined) {
+  const env_value = get_gha_input(name);
+
+  if (env_value !== undefined && env_value !== '') {
     render_options[name] = get_gha_input(name);
   }
 });
@@ -87,19 +89,19 @@ string_gha_input_names.forEach((name) => {
 
 
 // 'includePaths'       // Array, directories to look under for imports and used modules, splits on ':'
-if (get_gha_input('includePaths') !== undefined) {
-  render_options[name] = get_gha_input('includePaths').split(':');
+const includePaths = get_gha_input('includePaths');
+if (includePaths !== undefined && includePaths !== '') {
+  render_options[name] = includePaths.split(':');
 }
 
 
 // 'sourceMap'          // May be boolean or string, see https://sass-lang.com/documentation/js-api#sourcemap
-if (get_gha_input('sourceMap') !== undefined) {
-  const env_value = get_gha_input('sourceMap');
-
-  if (env_value === 'true' || env_value === 'false') {
-    render_options[name] = (env_value === 'true');
+const sourceMap = get_gha_input('sourceMap');
+if (sourceMap !== undefined && sourceMap !== '') {
+  if (sourceMap === 'true' || sourceMap === 'false') {
+    render_options[name] = (sourceMap === 'true');
   } else {
-    render_options[name] = env_value;
+    render_options[name] = sourceMap;
   }
 }
 
@@ -110,6 +112,11 @@ if (get_gha_input('sourceMap') !== undefined) {
 
 
 const result = sass.renderSync(render_options);
+
+if (get_gha_input('debug')) {
+  console.log('--- render_options ---');
+  console.table(render_options);
+}
 
 
 fs.writeFile(destination, result.css, (err) => {
