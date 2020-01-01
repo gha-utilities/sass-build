@@ -90,16 +90,16 @@ string_gha_input_names.forEach((name) => {
 // 'includePaths'       // Array, directories to look under for imports and used modules, splits on ':'
 const includePaths = get_gha_input('includePaths');
 if (includePaths !== undefined && includePaths !== '') {
-  render_options[name] = includePaths.split(':');
+  render_options['includePaths'] = includePaths.split(':');
 }
 
 // 'sourceMap'          // May be boolean or string, see https://sass-lang.com/documentation/js-api#sourcemap
 const sourceMap = get_gha_input('sourceMap');
 if (sourceMap !== undefined && sourceMap !== '') {
   if (sourceMap === 'true' || sourceMap === 'false') {
-    render_options[name] = (sourceMap === 'true');
+    render_options['sourceMap'] = (sourceMap === 'true');
   } else {
-    render_options[name] = sourceMap;
+    render_options['sourceMap'] = sourceMap;
   }
 }
 
