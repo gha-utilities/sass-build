@@ -18,7 +18,7 @@ inputs:
     required: false
 
   outputStyle:
-    description: 'String, either "expanded", "compressed", "nested", "compact"'
+    description: 'String, either "expanded", "compressed", "nested", "compact"; defaults to "compressed"'
     required: false
 
   precision:
