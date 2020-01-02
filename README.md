@@ -77,7 +77,7 @@ jobs:
         run: mkdir -vp /tmp/repo-name/assets/css
 
       - name: Compile CSS from SCSS files
-        uses: gha-utilities/sass-build@v0.0.11
+        uses: gha-utilities/sass-build@v0.1.0
         with:
           source: _scss/main.scss
           destination: /tmp/repo-name/assets/css/main.css
@@ -105,7 +105,7 @@ jobs:
           branch: pr-pages
 
       - name: Initialize Pull Request
-        uses: gha-utilities/init-pull-request@v0.0.2
+        uses: gha-utilities/init-pull-request@v0.0.4
         with:
           pull_request_token: ${{ secrets.GITHUB_TOKEN }}
           head: pr-pages
@@ -131,13 +131,13 @@ This repository is getting closer to feature complete, however, to compile multi
 
 ```YAML
     - name: Compile main.css from main.scss
-      uses: gha-utilities/sass-build@v0.0.11
+      uses: gha-utilities/sass-build@v0.1.0
       with:
         source: _scss/main.scss
         destination: /tmp/repo-name/assets/css/main.css
 
     - name: Compile alt.css from alt.scss
-      uses: gha-utilities/sass-build@v0.0.11
+      uses: gha-utilities/sass-build@v0.1.0
       with:
         source: _scss/alt.scss
         destination: /tmp/repo-name/assets/css/alt.css
@@ -176,7 +176,7 @@ jobs:
         run: mkdir -vp /tmp/assets/css
 
       - name: Compile CSS from SCSS files
-        uses: gha-utilities/sass-build@v0.0.11
+        uses: gha-utilities/sass-build@v0.1.0
         with:
           source: _scss/main.scss
           destination: /tmp/assets/css/main.css
@@ -232,7 +232,7 @@ jobs:
           branch: pr-pages
 
       - name: Initialize Pull Request
-        uses: gha-utilities/init-pull-request@v0.0.2
+        uses: gha-utilities/init-pull-request@v0.0.4
         with:
           pull_request_token: ${{ secrets.GITHUB_TOKEN }}
           head: pr-pages
@@ -256,8 +256,16 @@ ___
 ## Attribution
 [heading__attribution]:
   #attribution
-  "&#x1F4C7; Resources that where helpful in building this project so far."
+  "&#x1F4C7; Resources and individuals that where helpful in building this project so far."
 
+
+**Individuals**
+
+
+- [@wendigo Fork](https://github.com/wendigo/sass-build), so far fixed bugs and added sane defaults
+
+
+**Resources**
 
 
 - [GitHub -- Actions Create Pull Request](https://github.com/marketplace/actions/create-pull-request)
