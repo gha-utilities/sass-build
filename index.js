@@ -93,12 +93,10 @@ if (includePaths !== undefined && includePaths !== '') {
 
 // 'sourceMap'          // May be boolean or string, see https://sass-lang.com/documentation/js-api#sourcemap
 const sourceMap = get_gha_input('sourceMap');
-if (sourceMap !== undefined && sourceMap !== '') {
-  if (sourceMap === 'true' || sourceMap === 'false') {
-    render_options['sourceMap'] = (sourceMap === 'true');
-  } else {
-    render_options['sourceMap'] = sourceMap;
-  }
+if (sourceMap === 'true' || sourceMap === 'false') {
+  render_options['sourceMap'] = (sourceMap === 'true');
+} else if (sourceMap !== undefined && sourceMap !== '') {
+  render_options['sourceMap'] = sourceMap;
 }
 
 /**
