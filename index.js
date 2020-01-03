@@ -105,7 +105,10 @@ if (sourceMap !== undefined && sourceMap !== '') {
  * Compile and write-out CSS
  */
 
-console.log(render_options);
+if (get_gha_input('debug')) {
+  console.log('--- render_options ---');
+  console.table(render_options);
+}
 
 const result = sass.renderSync(render_options);
 
