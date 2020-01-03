@@ -56,10 +56,8 @@ const string_gha_input_names = [
 boolean_gha_input_names.forEach((name) => {
   const env_value = get_gha_input(name);
 
-  if (env_value !== undefined) {
-    if (env_value === 'true' || env_value === 'false') {
-      render_options[name] = (env_value === 'true');
-    }
+  if (env_value === 'true' || env_value === 'false') {
+    render_options[name] = (env_value === 'true');
   }
 });
 
@@ -67,7 +65,7 @@ boolean_gha_input_names.forEach((name) => {
 integer_gha_input_names.forEach((name) => {
   const env_value = get_gha_input(name);
 
-  if (env_value !== undefined && env_value !== '' && Number.parseInt(env_value) !== NaN) {
+  if (Number.parseInt(env_value) !== NaN) {
     render_options[name] = Number.parseInt(env_value);
   }
 });
