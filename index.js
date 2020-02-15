@@ -99,6 +99,18 @@ if (sourceMap === 'true' || sourceMap === 'false') {
   render_options['sourceMap'] = sourceMap;
 }
 
+
+/**
+ * Inputs that require defaulting
+ */
+
+
+// 'indentWidth'        // Cannot be `NaN` https://github.com/gha-utilities/sass-build/issues/11
+if (isNaN(render_options['indentWidth'])) {
+  render_options['indentWidth'] = 2;
+}
+
+
 /**
  * Compile and write-out CSS
  */
