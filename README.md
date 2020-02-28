@@ -280,6 +280,10 @@ ___
 
 - [StackOverflow -- GitHub Actions share Workspace Artifacts between jobs](https://stackoverflow.com/questions/57498605)
 
+- [StackOverflow -- Node.js check if path is file or directory](https://stackoverflow.com/questions/15630770)
+
+- [StackOverflow -- nodejs get file name from absolute path?](https://stackoverflow.com/questions/19811541)
+
 
 ___
 
