@@ -67,7 +67,7 @@ jobs:
 
     steps:
       - name: Checkout source Git branch
-        uses: actions/checkout@v1
+        uses: actions/checkout@v2
         with:
             ref: src-pages
             fetch-depth: 10
@@ -83,7 +83,7 @@ jobs:
           destination: /tmp/repo-name/assets/css/main.css
 
       - name: Checkout destination Git branch
-        uses: actions/checkout@v1
+        uses: actions/checkout@v2
         with:
             ref: pr-pages
             fetch-depth: 1
@@ -166,7 +166,7 @@ jobs:
 
     steps:
       - name: Checkout source Git branch
-        uses: actions/checkout@v1
+        uses: actions/checkout@v2
         with:
             ref: src-pages
             fetch-depth: 10
@@ -206,7 +206,7 @@ jobs:
 
     steps:
       - name: Checkout destination Git branch
-        uses: actions/checkout@v1
+        uses: actions/checkout@v2
         with:
             ref: gh-pages
             fetch-depth: 1
