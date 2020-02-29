@@ -1,11 +1,15 @@
 const fs = require('fs');
 const sass = require('sass');
+const path = require('path');
+
+const version = require('./package.json').version;
 
 
-const get_gha_input = function(name) { return process.env[`INPUT_${name.toUpperCase()}`]; };
+const get_gha_input = (name) => { return process.env[`INPUT_${name.toUpperCase()}`]; };
+
 
 const source = get_gha_input('source');
-const destination = get_gha_input('destination');
+let destination = get_gha_input('destination');
 
 if (source === undefined || destination === undefined) {
   const error_message = [
@@ -112,7 +116,7 @@ if (isNaN(render_options['indentWidth'])) {
 
 
 /**
- * Compile and write-out CSS
+ * Compile CSS
  */
 
 if (get_gha_input('debug')) {
@@ -120,12 +124,42 @@ if (get_gha_input('debug')) {
   console.table(render_options);
 }
 
-const result = sass.renderSync(render_options);
+const sass_result = sass.renderSync(render_options);
 
-fs.writeFile(destination, result.css, (err) => {
-  if (err) {
-    throw err;
-  } else {
-    console.log(`Wrote file -> ${destination}`);
+
+/**
+ * Write CSS to file path
+ */
+
+fs.stat(destination, (err, stat) => {
+  if (err && err.code === 'ENOENT') {
+    const warnning_message = [
+      `Warning: ${err.message}`,
+      `Attempting to write to file path -> ${destination}`,
+    ];
+
+    console.warn(warnning_message.join('\n'));
+  } else if (stat.isDirectory()) {
+    destination = `${destination}/${path.basename(source)}`;
+
+    const warnning_message = [
+      `Warning: destination path was converted to -> "${destination}"`,
+      'To avoid this warning please assign `destination` to a file path, eg...',
+      '  - name: Compile CSS from SCSS files',
+      `    uses: gha-utilities/sass-build@v${version}`,
+      '    with:',
+      `      source: ${source}`,
+      `      destination: ${destination}`,
+    ];
+
+    console.warn(warnning_message.join('\n'));
   }
+
+  fs.writeFile(destination, sass_result.css, (err) => {
+    if (err) {
+      throw err;
+    } else {
+      console.log(`Wrote file -> ${destination}`);
+    }
+  });
 });
