@@ -24,5 +24,8 @@
   "homepage": "https://github.com/gha-utilities/sass-build#readme",
   "dependencies": {
     "sass": "^1.26.1"
+  },
+  "devDependencies": {
+    "@types/sass": "^1.16.0"
   }
 }
