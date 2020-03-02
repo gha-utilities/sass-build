@@ -1,4 +1,4 @@
-0.2.0## GHA Sass Build
+## GHA Sass Build
 [heading__title]:
   #gha-sass-build
   "&#x2B06; Top of ReadMe File"
@@ -77,7 +77,7 @@ jobs:
         run: mkdir -vp /tmp/repo-name/assets/css
 
       - name: Compile CSS from SCSS files
-        uses: gha-utilities/sass-build@v0.2.0
+        uses: gha-utilities/sass-build@v0.2.1
         with:
           source: _scss/main.scss
           destination: /tmp/repo-name/assets/css/main.css
@@ -131,13 +131,13 @@ This repository is getting closer to feature complete, however, to compile multi
 
 ```YAML
     - name: Compile main.css from main.scss
-      uses: gha-utilities/sass-build@v0.2.0
+      uses: gha-utilities/sass-build@v0.2.1
       with:
         source: _scss/main.scss
         destination: /tmp/repo-name/assets/css/main.css
 
     - name: Compile alt.css from alt.scss
-      uses: gha-utilities/sass-build@v0.2.0
+      uses: gha-utilities/sass-build@v0.2.1
       with:
         source: _scss/alt.scss
         destination: /tmp/repo-name/assets/css/alt.css
@@ -176,7 +176,7 @@ jobs:
         run: mkdir -vp /tmp/assets/css
 
       - name: Compile CSS from SCSS files
-        uses: gha-utilities/sass-build@v0.2.0
+        uses: gha-utilities/sass-build@v0.2.1
         with:
           source: _scss/main.scss
           destination: /tmp/assets/css/main.css
