@@ -1,4 +1,5 @@
 ## Node GitHub Action dependencies must be checked-in
 # node_modules
 node_modules/@types
+node_modules/**/**.ts
 .DS_Store
