@@ -10,7 +10,7 @@ GitHub Action JavaScript wrapper runs Sass build with provided Inputs
 ## [![Byte size of gha-sass][badge__master__gha_sass_build__source_code]][gha_sass_build__master__source_code] [![Open Issues][badge__issues__gha_sass_build]][issues__gha_sass_build] [![Open Pull Requests][badge__pull_requests__gha_sass_build]][pull_requests__gha_sass_build] [![Latest commits][badge__commits__gha_sass_build__master]][commits__gha_sass_build__master]
 
 
-------
+---
 
 
 #### Table of Contents
@@ -29,7 +29,7 @@ GitHub Action JavaScript wrapper runs Sass build with provided Inputs
 - [:balance_scale: License][heading__license]
 
 
-------
+---
 
 
 
@@ -42,7 +42,7 @@ GitHub Action JavaScript wrapper runs Sass build with provided Inputs
 Access to GitHub Actions if using on GitHub, or manually assigning environment variables prior to running `npm test`.
 
 
-___
+______
 
 
 ## Quick Start
@@ -117,7 +117,7 @@ jobs:
 ```
 
 
-___
+______
 
 
 ## Notes
@@ -144,7 +144,7 @@ This repository is getting closer to feature complete, however, to compile multi
 ```
 
 
-------
+---
 
 
 To pass compiled CSS to another workflow utilize the Upload and Download Actions from GitHub...
@@ -244,13 +244,13 @@ jobs:
 ```
 
 
-------
+---
 
 
 This repository is influenced by tests preformed by `sass-utilities/gha-sass` which uses Docker powered GitHub Actions to achieve similar results. What differs are that this repository will start faster and enables configuring the build process further, see the [`action.yml`](action.yml) for currently available configurations.
 
 
-___
+______
 
 
 ## Attribution
@@ -285,7 +285,7 @@ ___
 - [StackOverflow -- nodejs get file name from absolute path?](https://stackoverflow.com/questions/19811541)
 
 
-___
+______
 
 
 ## License
