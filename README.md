@@ -126,21 +126,21 @@ ______
   "&#x1F5D2; Additional notes and links that may be worth clicking in the future"
 
 
-This repository is getting closer to feature complete, however, to compile multiple sources and destinations one should define multiple steps...
+To compile multiple files, define `source` and `destination` similarly to how you would assign `run` multiple commands. Make sure each file in `source` and `destination` are lined up.
 
 
 ```YAML
     - name: Compile main.css from main.scss
       uses: gha-utilities/sass-build@v0.3.1
       with:
-        source: _scss/main.scss
-        destination: /tmp/repo-name/assets/css/main.css
-
-    - name: Compile alt.css from alt.scss
-      uses: gha-utilities/sass-build@v0.3.1
-      with:
-        source: _scss/alt.scss
-        destination: /tmp/repo-name/assets/css/alt.css
+        source: |
+          _scss/main.scss
+          _scss/global.scss
+          _scss/articles/post.scss
+        destination: |
+          /tmp/repo-name/assets/css/main.css
+          /tmp/repo-name/assets/css/global.css
+          /tmp/repo-name/assets/css/articles/post.css
 ```
 
 
