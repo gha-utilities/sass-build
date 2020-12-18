@@ -133,35 +133,35 @@ function build_CSS(source_file, destination_file) {
    * Write CSS to file path
    */
 
-  fs.stat(destination, (err, stat) => {
+  fs.stat(destination_file, (err, stat) => {
     if (err && err.code === 'ENOENT') {
       const warnning_message = [
         `Warning: ${err.message}`,
-        `Attempting to write to file path -> ${destination}`,
+        `Attempting to write to file path -> ${destination_file}`,
       ];
 
       console.warn(warnning_message.join('\n'));
     } else if (stat.isDirectory()) {
-      destination = `${destination}/${path.basename(source)}`;
+      destination_file = `${destination_file}/${path.basename(source_file)}`;
 
       const warnning_message = [
-        `Warning: destination path was converted to -> "${destination}"`,
+        `Warning: destination path was converted to -> "${destination_file}"`,
         'To avoid this warning please assign `destination` to a file path, eg...',
         '  - name: Compile CSS from SCSS files',
         `    uses: gha-utilities/sass-build@v${version}`,
         '    with:',
-        `      source: ${source}`,
-        `      destination: ${destination}`,
+        `      source: ${source_file}`,
+        `      destination: ${destination_file}`,
       ];
 
       console.warn(warnning_message.join('\n'));
     }
 
-    fs.writeFile(destination, sass_result.css, (err) => {
+    fs.writeFile(destination_file, sass_result.css, (err) => {
       if (err) {
         throw err;
       } else {
-        console.log(`Wrote file -> ${destination}`);
+        console.log(`Wrote file -> ${destination_file}`);
       }
     });
   });
