@@ -26,7 +26,10 @@ if (source === undefined || destination === undefined) {
 }
 
 
-const render_options = { outputStyle: 'compressed' };
+const render_options = {
+  outputStyle: 'compressed',
+  indentWidth: 2  // Cannot be `NaN` https://github.com/gha-utilities/sass-build/issues/11
+};
 
 
 /**
@@ -101,17 +104,6 @@ if (sourceMap === 'true' || sourceMap === 'false') {
   render_options['sourceMap'] = (sourceMap === 'true');
 } else if (sourceMap !== undefined && sourceMap !== '') {
   render_options['sourceMap'] = sourceMap;
-}
-
-
-/**
- * Inputs that require defaulting
- */
-
-
-// 'indentWidth'        // Cannot be `NaN` https://github.com/gha-utilities/sass-build/issues/11
-if (isNaN(render_options['indentWidth'])) {
-  render_options['indentWidth'] = 2;
 }
 
 
