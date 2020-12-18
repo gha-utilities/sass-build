@@ -4,11 +4,11 @@ description: 'GitHub Action JavaScript wrapper runs Sass build with provided Inp
 
 inputs:
   source:
-    description: 'Relative path to SASS or SCSS file, eg. _scss/main.scss'
+    description: 'Relative path(s) to SASS or SCSS file, eg. _scss/main.scss'
     required: true
 
   destination:
-    description: 'Path compiled CSS should be saved, eg. ~/workspace_sass/assets/css/main.css'
+    description: 'Path(s) compiled CSS should be saved, eg. ~/workspace_sass/assets/css/main.css'
     required: true
 
 
