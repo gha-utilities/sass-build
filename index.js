@@ -109,6 +109,8 @@ if (sourceMap === 'true' || sourceMap === 'false') {
 
 /**
  * Compiles CSS and write it to file path
+ * @param {string} source_file - Path to SCSS or SASS file to parse
+ * @param {string} destination_file - Path to CSS file to write
  */
 function build_CSS(source_file, destination_file) {
   render_options['file'] = source_file;
