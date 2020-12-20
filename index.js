@@ -8,8 +8,8 @@ const version = require('./package.json').version;
 const get_gha_input = (name) => { return process.env[`INPUT_${name.toUpperCase()}`]; };
 
 
-const source = get_gha_input('source');
-let destination = get_gha_input('destination');
+const source = get_gha_input('source').split('\n');
+const destination = get_gha_input('destination').split('\n');
 
 if (source === undefined || destination === undefined) {
   const error_message = [
@@ -26,7 +26,10 @@ if (source === undefined || destination === undefined) {
 }
 
 
-const render_options = { file: source, outputStyle: 'compressed' };
+const render_options = {
+  outputStyle: 'compressed',
+  indentWidth: 2  // Cannot be `NaN` https://github.com/gha-utilities/sass-build/issues/11
+};
 
 
 /**
@@ -105,61 +108,66 @@ if (sourceMap === 'true' || sourceMap === 'false') {
 
 
 /**
- * Inputs that require defaulting
+ * Compile CSS and write it to file path
  */
 
 
-// 'indentWidth'        // Cannot be `NaN` https://github.com/gha-utilities/sass-build/issues/11
-if (isNaN(render_options['indentWidth'])) {
-  render_options['indentWidth'] = 2;
-}
+function build_CSS(source_file, destination_file) {
 
-
-/**
+  render_options['file'] = source_file;
+  
+  
+  /**
  * Compile CSS
  */
 
-if (get_gha_input('debug')) {
-  console.log('--- render_options ---');
-  console.table(render_options);
-}
-
-const sass_result = sass.renderSync(render_options);
-
-
-/**
- * Write CSS to file path
- */
-
-fs.stat(destination, (err, stat) => {
-  if (err && err.code === 'ENOENT') {
-    const warnning_message = [
-      `Warning: ${err.message}`,
-      `Attempting to write to file path -> ${destination}`,
-    ];
-
-    console.warn(warnning_message.join('\n'));
-  } else if (stat.isDirectory()) {
-    destination = `${destination}/${path.basename(source)}`;
-
-    const warnning_message = [
-      `Warning: destination path was converted to -> "${destination}"`,
-      'To avoid this warning please assign `destination` to a file path, eg...',
-      '  - name: Compile CSS from SCSS files',
-      `    uses: gha-utilities/sass-build@v${version}`,
-      '    with:',
-      `      source: ${source}`,
-      `      destination: ${destination}`,
-    ];
-
-    console.warn(warnning_message.join('\n'));
+  if (get_gha_input('debug')) {
+    console.log('--- render_options ---');
+    console.table(render_options);
   }
 
-  fs.writeFile(destination, sass_result.css, (err) => {
-    if (err) {
-      throw err;
-    } else {
-      console.log(`Wrote file -> ${destination}`);
+  const sass_result = sass.renderSync(render_options);
+
+
+  /**
+   * Write CSS to file path
+   */
+
+  fs.stat(destination_file, (err, stat) => {
+    if (err && err.code === 'ENOENT') {
+      const warnning_message = [
+        `Warning: ${err.message}`,
+        `Attempting to write to file path -> ${destination_file}`,
+      ];
+
+      console.warn(warnning_message.join('\n'));
+    } else if (stat.isDirectory()) {
+      destination_file = `${destination_file}/${path.basename(source_file)}`;
+
+      const warnning_message = [
+        `Warning: destination path was converted to -> "${destination_file}"`,
+        'To avoid this warning please assign `destination` to a file path, eg...',
+        '  - name: Compile CSS from SCSS files',
+        `    uses: gha-utilities/sass-build@v${version}`,
+        '    with:',
+        `      source: ${source_file}`,
+        `      destination: ${destination_file}`,
+      ];
+
+      console.warn(warnning_message.join('\n'));
     }
+
+    fs.writeFile(destination_file, sass_result.css, (err) => {
+      if (err) {
+        throw err;
+      } else {
+        console.log(`Wrote file -> ${destination_file}`);
+      }
+    });
   });
-});
+}
+
+for (i=0;i<source.length;i++) { // last elemenet of sources & destinations is an empty string
+	if ( source[i] != '' && source[i] != undefined && destination[i] != '' && destination[i] != undefined )
+	build_CSS(source[i], destination[i]);
+}
