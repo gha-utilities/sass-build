@@ -108,19 +108,10 @@ if (sourceMap === 'true' || sourceMap === 'false') {
 
 
 /**
- * Compile CSS and write it to file path
+ * Compiles CSS and write it to file path
  */
-
-
 function build_CSS(source_file, destination_file) {
-
   render_options['file'] = source_file;
-  
-  
-  /**
- * Compile CSS
- */
-
   if (get_gha_input('debug')) {
     console.log('--- render_options ---');
     console.table(render_options);
@@ -128,11 +119,9 @@ function build_CSS(source_file, destination_file) {
 
   const sass_result = sass.renderSync(render_options);
 
-
   /**
    * Write CSS to file path
    */
-
   fs.stat(destination_file, (err, stat) => {
     if (err && err.code === 'ENOENT') {
       const warnning_message = [
@@ -167,7 +156,12 @@ function build_CSS(source_file, destination_file) {
   });
 }
 
-for (i=0;i<source.length;i++) { // last elemenet of sources & destinations is an empty string
-	if ( source[i] != '' && source[i] != undefined && destination[i] != '' && destination[i] != undefined )
-	build_CSS(source[i], destination[i]);
+
+/**
+ * @note - Last element of sources & destinations is an empty string
+ */
+for (i=0; i<source.length; i++) {
+  if ( source[i] != '' && source[i] != undefined && destination[i] != '' && destination[i] != undefined )
+  build_CSS(source[i], destination[i]);
 }
+
