@@ -163,7 +163,8 @@ function build_CSS(source_file, destination_file) {
  * @note - Last element of sources & destinations is an empty string
  */
 for (i=0; i<source.length; i++) {
-  if ( source[i] != '' && source[i] != undefined && destination[i] != '' && destination[i] != undefined )
-  build_CSS(source[i], destination[i]);
+  if (!['', undefined].includes(source[i]) && !['', undefined].includes(destination[i])) {
+    build_CSS(source[i], destination[i]);
+  }
 }
 
