@@ -23,7 +23,7 @@
   },
   "homepage": "https://github.com/gha-utilities/sass-build#readme",
   "dependencies": {
-    "sass": "^1.33.0"
+    "sass": "^1.34.0"
   },
   "devDependencies": {
     "@types/node": "^15.3.1",
