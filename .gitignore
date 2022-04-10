@@ -2,6 +2,7 @@
 # node_modules
 node_modules/@types
 node_modules/**/**.ts
+node_modules/**/README*
 node_modules/.bin
 node_modules/.package-lock.json
 node_modules/typescript
