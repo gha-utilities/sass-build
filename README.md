@@ -77,7 +77,7 @@ jobs:
         run: mkdir -vp /tmp/repo-name/assets/css
 
       - name: Compile CSS from SCSS files
-        uses: gha-utilities/sass-build@v0.4.11
+        uses: gha-utilities/sass-build@v0.5.0
         with:
           source: _scss/main.scss
           destination: /tmp/repo-name/assets/css/main.css
@@ -131,7 +131,7 @@ To compile multiple files, define `source` and `destination` similarly to how yo
 
 ```YAML
     - name: Compile main.css from main.scss
-      uses: gha-utilities/sass-build@v0.4.11
+      uses: gha-utilities/sass-build@v0.5.0
       with:
         source: |
           _scss/main.scss
@@ -176,7 +176,7 @@ jobs:
         run: mkdir -vp /tmp/assets/css
 
       - name: Compile CSS from SCSS files
-        uses: gha-utilities/sass-build@v0.4.11
+        uses: gha-utilities/sass-build@v0.5.0
         with:
           source: _scss/main.scss
           destination: /tmp/assets/css/main.css
@@ -299,7 +299,7 @@ Legal bits of Open Source software. Note the following license does **not** nece
 
 ```
 Sass Build GitHub Actions documentation
-Copyright (C) 2019  S0AndS0
+Copyright (C) 2023  S0AndS0
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU Affero General Public License as published
