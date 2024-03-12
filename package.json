@@ -1,6 +1,6 @@
 {
   "name": "sass-build",
-  "version": "0.4.11",
+  "version": "0.6.0",
   "description": "GitHub Action JavaScript wrapper runs Sass build with provided Inputs",
   "main": "index.js",
   "scripts": {
