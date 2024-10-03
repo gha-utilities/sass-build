@@ -115,7 +115,7 @@ if (sourceMap === 'true' || sourceMap === 'false') {
 }
 
 
-function saveFile(fileContent, filePath) {
+function saveFile(filePath, fileContent) {
 	fs.writeFile(filePath, fileContent, (err) => {
 		if (err) {
 			throw err;
