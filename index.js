@@ -43,6 +43,8 @@ const boolean_gha_input_names = [
   'sourceMapContents',  // Boolean, when `true` embeds contents of Sass files that contributed to compiled CSS
   'sourceMapEmbed',     // Boolean, when `true` embeds source map within compiled CSS
 ];
+var generate_source_map;
+var source_map_filename;
 
 
 const integer_gha_input_names = [
@@ -99,10 +101,16 @@ if (includePaths !== undefined && includePaths !== '') {
 }
 
 // 'sourceMap'          // May be boolean or string, see https://sass-lang.com/documentation/js-api#sourcemap
+// 'outFile'						// String, does not write but is useful in combination with 'sourceMap'
 const sourceMap = get_gha_input('sourceMap');
+const outFile = get_gha_input('outFile');
 if (sourceMap === 'true' || sourceMap === 'false') {
+	generate_source_map = (sourceMap === 'true');
+	source_map_filename = `${outFile}.map`
   render_options['sourceMap'] = (sourceMap === 'true');
 } else if (sourceMap !== undefined && sourceMap !== '') {
+	generate_source_map = true;
+	source_map_filename = sourceMap;
   render_options['sourceMap'] = sourceMap;
 }
 
@@ -161,6 +169,11 @@ function build_CSS(source_file, destination_file) {
 
 		// write CSS file
 		saveFile(destination_file, sass_result.css);
+
+		// write map file, if desired
+		if (generate_source_map == true) {
+			saveFile(source_map_filename, sass_result.map)
+		}
   });
 }
 
