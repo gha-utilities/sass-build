@@ -1,4 +1,4 @@
-name: 'Sass Build'
+name: 'Sass Build with Maps'
 description: 'GitHub Action JavaScript wrapper runs Sass build with provided Inputs'
 
 
@@ -31,7 +31,7 @@ inputs:
 
   indentWidth:
     description: 'Integer, of tabs/spaces used to indent, eg. `1`'
-    default: 2
+    default: '2'
     required: false
 
   linefeed:
