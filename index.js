@@ -172,7 +172,8 @@ function build_CSS(source_file, destination_file) {
 
 		// write map file, if desired
 		if (generate_source_map == true) {
-			saveFile(source_map_filename, sass_result.map)
+			const source_map_filePath = `${path.dirname(destination_file)}/${source_map_filename}`
+			saveFile(source_map_filePath, sass_result.map)
 		}
   });
 }
