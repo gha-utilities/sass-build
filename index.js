@@ -107,6 +107,17 @@ if (sourceMap === 'true' || sourceMap === 'false') {
 }
 
 
+function saveFile(fileContent, filePath) {
+	fs.writeFile(filePath, fileContent, (err) => {
+		if (err) {
+			throw err;
+		} else {
+			console.log(`Wrote file -> ${filePath}`);
+		}
+	});
+}
+
+
 /**
  * Compiles CSS and write it to file path
  * @param {string} source_file - Path to SCSS or SASS file to parse
@@ -148,13 +159,8 @@ function build_CSS(source_file, destination_file) {
       console.warn(warnning_message.join('\n'));
     }
 
-    fs.writeFile(destination_file, sass_result.css, (err) => {
-      if (err) {
-        throw err;
-      } else {
-        console.log(`Wrote file -> ${destination_file}`);
-      }
-    });
+		// write CSS file
+		saveFile(destination_file, sass_result.css);
   });
 }
 
