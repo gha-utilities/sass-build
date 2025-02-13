@@ -104,10 +104,16 @@ if (includePaths !== undefined && includePaths !== '') {
 // 'outFile'						// String, does not write but is useful in combination with 'sourceMap'
 const sourceMap = get_gha_input('sourceMap');
 const outFile = get_gha_input('outFile');
+
+// if the sourceMap is passed as a boolean in a string, get its boolean value and the name of the outfile
 if (sourceMap === 'true' || sourceMap === 'false') {
 	generate_source_map = (sourceMap === 'true');
-	source_map_filename = `${outFile}.map`
+  // if outFile isn't given, set it to the name of the main CSS output file (ex: 'main.css') and append '.map'
+	source_map_filename = outFile !== undefined ? `${outFile}` : `${path.basename(destination.join())}.map`;
   render_options['sourceMap'] = (sourceMap === 'true');
+
+// if sourceMap is passed as a string itself, i.e. a path, consider it true and set the outfile 
+// name to its sourceMap's value
 } else if (sourceMap !== undefined && sourceMap !== '') {
 	generate_source_map = true;
 	source_map_filename = sourceMap;
@@ -116,13 +122,14 @@ if (sourceMap === 'true' || sourceMap === 'false') {
 
 
 function saveFile(filePath, fileContent) {
-	fs.writeFile(filePath, fileContent, (err) => {
-		if (err) {
-			throw err;
-		} else {
-			console.log(`Wrote file -> ${filePath}`);
-		}
-	});
+  const content = typeof fileContent === 'object' ? JSON.stringify(fileContent) : fileContent;
+  fs.writeFile(filePath, content, (err) => {
+    if (err) {
+      throw err;
+    } else {
+      console.log(`Wrote file -> ${filePath}`);
+    }
+  });
 }
 
 
@@ -138,44 +145,48 @@ function build_CSS(source_file, destination_file) {
     console.table(render_options);
   }
 
-  const sass_result = sass.renderSync(render_options);
+  try {
+    const result = sass.compile(source_file, render_options);  // use sass.compile to create sourcemap
 
-  /**
-   * Write CSS to file path
-   */
-  fs.stat(destination_file, (err, stat) => {
-    if (err && err.code === 'ENOENT') {
-      const warnning_message = [
-        `Warning: ${err.message}`,
-        `Attempting to write to file path -> ${destination_file}`,
-      ];
+    /**
+     * Write CSS to file path
+     */
+    fs.stat(destination_file, (err, stat) => {
+      if (err && err.code === 'ENOENT') {
+        const warning_message = [
+          `Warning: ${err.message}`,
+          `Attempting to write to file path -> ${destination_file}`,
+        ];
 
-      console.warn(warnning_message.join('\n'));
-    } else if (stat.isDirectory()) {
-      destination_file = `${destination_file}/${path.basename(source_file)}`;
+        console.warn(warning_message.join('\n'));
+      } else if (stat.isDirectory()) {
+        destination_file = `${destination_file}/${path.basename(source_file)}`;
 
-      const warnning_message = [
-        `Warning: destination path was converted to -> "${destination_file}"`,
-        'To avoid this warning please assign `destination` to a file path, eg...',
-        '  - name: Compile CSS from SCSS files',
-        `    uses: gha-utilities/sass-build@v${version}`,
-        '    with:',
-        `      source: ${source_file}`,
-        `      destination: ${destination_file}`,
-      ];
+        const warning_message = [
+          `Warning: destination path was converted to -> "${destination_file}"`,
+          'To avoid this warning please assign `destination` to a file path, eg...',
+          '  - name: Compile CSS from SCSS files',
+          `    uses: gha-utilities/sass-build@v${version}`,
+          '    with:',
+          `      source: ${source_file}`,
+          `      destination: ${destination_file}`,
+        ];
 
-      console.warn(warnning_message.join('\n'));
-    }
+        console.warn(warning_message.join('\n'));
+      }
 
-		// write CSS file
-		saveFile(destination_file, sass_result.css);
+      // write CSS file
+      saveFile(destination_file, result.css);
 
-		// write map file, if desired
-		if (generate_source_map == true) {
-			const source_map_filePath = `${path.dirname(destination_file)}/${source_map_filename}`
-			saveFile(source_map_filePath, sass_result.map)
-		}
-  });
+      // write map file, if desired
+      if (generate_source_map == true) {
+        const source_map_filePath = `${path.dirname(destination_file)}/${source_map_filename}`;
+        saveFile(source_map_filePath, result.sourceMap);
+      }
+    });
+  } catch (err) {
+    throw err;
+  }
 }
 
 
