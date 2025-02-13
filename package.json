@@ -1,6 +1,6 @@
 {
   "name": "sass-build-with-maps",
-  "version": "0.7.4",
+  "version": "0.6.1",
   "description": "GitHub Action JavaScript wrapper runs Sass build with provided Inputs, exporting Map files when desired.",
   "main": "index.js",
   "scripts": {
