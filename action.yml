@@ -1,4 +1,4 @@
-name: 'Sass Build with Maps'
+name: 'Sass Build'
 description: 'GitHub Action JavaScript wrapper runs Sass build with provided Inputs'
 
 
