@@ -101,22 +101,22 @@ if (includePaths !== undefined && includePaths !== '') {
 }
 
 // 'sourceMap'          // May be boolean or string, see https://sass-lang.com/documentation/js-api#sourcemap
-// 'outFile'						// String, does not write but is useful in combination with 'sourceMap'
+// 'outFile'            // String, does not write but is useful in combination with 'sourceMap'
 const sourceMap = get_gha_input('sourceMap');
 const outFile = get_gha_input('outFile');
 
 // if the sourceMap is passed as a boolean in a string, get its boolean value and the name of the outfile
 if (sourceMap === 'true' || sourceMap === 'false') {
-	generate_source_map = (sourceMap === 'true');
+  generate_source_map = (sourceMap === 'true');
   // if outFile isn't given, set it to the name of the main CSS output file (ex: 'main.css') and append '.map'
-	source_map_filename = outFile !== undefined ? `${outFile}` : `${path.basename(destination.join())}.map`;
+  source_map_filename = outFile !== undefined ? `${outFile}` : `${path.basename(destination.join())}.map`;
   render_options['sourceMap'] = (sourceMap === 'true');
 
 // if sourceMap is passed as a string itself, i.e. a path, consider it true and set the outfile 
 // name to its sourceMap's value
 } else if (sourceMap !== undefined && sourceMap !== '') {
-	generate_source_map = true;
-	source_map_filename = sourceMap;
+  generate_source_map = true;
+  source_map_filename = sourceMap;
   render_options['sourceMap'] = sourceMap;
 }
 
