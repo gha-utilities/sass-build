@@ -31,7 +31,7 @@ inputs:
 
   indentWidth:
     description: 'Integer, of tabs/spaces used to indent, eg. `1`'
-    default: 2
+    default: '2'
     required: false
 
   linefeed:

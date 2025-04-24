@@ -1,10 +1,13 @@
 {
   "name": "sass-build",
-  "version": "0.6.0",
-  "description": "GitHub Action JavaScript wrapper runs Sass build with provided Inputs",
+  "version": "0.6.1",
+  "description": "GitHub Action JavaScript wrapper runs Sass build with provided Inputs, exporting Map files when desired.",
   "main": "index.js",
   "scripts": {
-    "test": "node index.js"
+    "test": "node index.js",
+    "test-compile": "INPUT_SOURCE=test/main.sass INPUT_DESTINATION=test/main.css node index.js",
+    "test-sourcemap-auto": "INPUT_SOURCE=test/main.sass INPUT_DESTINATION=test/main.css INPUT_SOURCEMAP=true node index.js",
+    "test-sourcemap-manual": "INPUT_SOURCE=test/main.sass INPUT_DESTINATION=test/main.css INPUT_SOURCEMAP=true INPUT_OUTFILE=manual.css.map node index.js"
   },
   "repository": {
     "type": "git",
